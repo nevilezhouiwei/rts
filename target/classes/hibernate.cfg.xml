@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- 配置关于数据库连接的四个项：driverClass url username password -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///world</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">abc123</property>
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<!-- Exception in thread "main" org.hibernate.HibernateException: No CurrentSessionContext 
+			configured! -->
+
+		<property name="current_session_context_class">thread</property>
+		<!-- 可以将向数据库发送的SQL语句显示出来 -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- 格式化SQL语句 -->
+		<property name="hibernate.format_sql">true</property>
+		<!-- 表示加载时自动更新数据库结构（即如果没有该表，则创建；有则不再创建，只更新 -->
+		<property name="hbm2ddl.auto">update</property>
+
+		<!-- hibernate的方言 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+
+
+
+		<!-- 配置hibernate的映射文件所在的位置 -->
+		<!-- many-to-one 
+		<mapping resource="com/nevile/rts/hibernate/maping/manyone/pojo/Event.hbm.xml" />
+		<mapping resource="com/nevile/rts/hibernate/maping/manyone/pojo/Person.hbm.xml" />
+		-->
+		<!-- one-to-many -->
+		<mapping resource="com/nevile/rts/hibernate/maping/onemany/pojo/Event.hbm.xml" />
+		<mapping resource="com/nevile/rts/hibernate/maping/onemany/pojo/Person.hbm.xml" />
+		
+		<!-- bi-one-to-many 
+		<mapping resource="com/nevile/rts/hibernate/maping/bionemany/pojo/Event.hbm.xml" />
+		<mapping resource="com/nevile/rts/hibernate/maping/bionemany/pojo/Person.hbm.xml" />
+		-->
+		<!-- many-to-many 
+		<mapping resource="com/nevile/rts/hibernate/maping/many2many/pojo/Event.hbm.xml" />
+		<mapping resource="com/nevile/rts/hibernate/maping/many2many/pojo/Person.hbm.xml" />
+		-->
+	</session-factory>
+</hibernate-configuration>

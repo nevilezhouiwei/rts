@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	">
+	<!-- spring bean 容器使用默认的命名空间 -->
+	<bean id="student" class="com.nevile.rts.base.aop.pojo.Student">
+		<property name="sex" value="男"></property>
+		<property name="address" ref="address"></property>
+	</bean>
+	<bean id="address" class="com.nevile.rts.base.aop.pojo.Address"></bean>
+
+	<bean id="StudentDaoImp" class="com.nevile.rts.base.aop.dao.imp.StudentDaoImp"></bean>
+	<bean id="AddStudentImp" class="com.nevile.rts.base.aop.service.Imp.AddStudentImp"></bean>
+	<bean id="SystemLog" class="com.nevile.rts.base.aop.aspect.SystemLog"></bean>
+	<bean id="ListenLog" class="com.nevile.rts.base.aop.aspect.ListenLog"></bean>
+	<context:component-scan base-package="com.nevile.rts.base"></context:component-scan>
+
+	<!-- AOP 配置 -->
+	<aop:config>
+		<!-- 采用半 自动代理，实现切点编程 -->
+	    <aop:advisor advice-ref="SystemLog" pointcut-ref="savePoint" />
+		<!-- AOP 切面类配置-->
+		<aop:aspect ref="ListenLog">
+			<aop:pointcut expression="execution(* com.nevile.rts.spring.aop.dao.imp.*.*(..))"
+				id="savePoint" />
+			<aop:before method="before" pointcut-ref="savePoint"/>
+			<aop:after-returning method="after" pointcut-ref="savePoint" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>
+ 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.nevile.rts.hibernate.maping.bionemany.pojo">
+
+	<class name="Person" table="T_PERSON">
+		<id name="id" type="long" column="PERSON_ID">
+			<generator class="native" />
+		</id>
+		<property name="age" />
+		<property name="firstname" />
+		<property name="lastname" />
+		<!-- one-to-many -->
+		<!-- 
+		set:name指定Person中的集合属性
+		key:column指定Event中的外键
+		one-to-many:class指定Event的类名
+		 -->
+		<set name="events">
+			<key column="PERSON_ID"></key>
+			<one-to-many class="Event"/>
+		</set>
+		
+	</class>
+
+</hibernate-mapping>

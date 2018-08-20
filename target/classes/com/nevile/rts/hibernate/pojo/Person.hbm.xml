@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.nevile.rts.hibernate.pojo">
+
+	<class name="Person" table="PERSON">
+		<id name="id" column="PERSON_ID">
+			<generator class="native" />
+		</id>
+		<property name="age" />
+		<property name="firstname" />
+		<property name="lastname" />
+		<!-- many-to-many多对多的映射配置 -->
+		<!-- inverse="false"不进行控制权的反转 -->
+		<set name="events" table="PERSON_EVENT" inverse="false">
+			<key column="PERSON_ID" />
+			<many-to-many column="EVENT_ID" class="Event" />
+		</set>
+		<!-- 实体类中的集合，没有实体与之对应，Hibernate 自定义在库中创表， 这与实体配置多表联查有区别-->
+		<set name="emailAddresses" table="PERSON_EMAIL_ADDR">
+			<key column="PERSON_ID" />
+			<element type="string" column="EMAIL_ADDR" />
+		</set>
+
+	</class>
+
+</hibernate-mapping>
