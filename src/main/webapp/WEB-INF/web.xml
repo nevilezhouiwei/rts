@@ -1,29 +1,49 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 使用高版本的JSP,默认支持EL表达式 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
+	xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 
-<web-app>
-<!-- jsp页面添加默认编码配置，内容类型设置 -->
-	<!--  <jsp-config>
+	<!-- jsp页面添加默认编码配置，内容类型设置 -->
+	<jsp-config>
 		<jsp-property-group>
-		<url-pattern>*.jsp</url-pattern>
-		<page-encoding>UTF-8</page-encoding>
-		<default-content-type>text/html</default-content-type>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>UTF-8</page-encoding>
+			<default-content-type>text/html</default-content-type>
 		</jsp-property-group>
 	</jsp-config>
-	-->
-	<display-name>Archetype Created Web Application</display-name>
+	<display-name>Road to Spring Web Application</display-name>
+	<!-- Servlet生命周期变量:ContextParament,放在最前面,保证参数都加载到内存中 -->
 
-	<filter>
-		<filter-name>LogsFilter</filter-name>
-		<display-name>LogsFilter</display-name>
-		<description></description>
-		<filter-class>com.nevile.rts.web.servlet.base.filter.LogsFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>LogsFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/springApplicatonContext.xml</param-value>
+	</context-param>
+
+	<!-- 加载Spring监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Spring MVC核心控制器配置。就是一个核心Servlet -->
+	<servlet>
+		<servlet-name>spring-mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/springmvc-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- 核心控制器拦截所有的请求 -->
+	<servlet-mapping>
+		<servlet-name>spring-mvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
 
 
 

@@ -22,7 +22,7 @@ public class AopAnotaionTest {
 
 	@Test
 	public void test() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicatonContext-aop-anotation.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring/springApplicatonContext.xml");
 		Student student = context.getBean(Student.class);
 		student.setId(1);
 		student.setName("rts");

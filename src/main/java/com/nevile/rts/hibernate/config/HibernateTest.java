@@ -8,7 +8,6 @@
 */
 package com.nevile.rts.hibernate.config;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.junit.Test;
 

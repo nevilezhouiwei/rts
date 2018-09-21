@@ -1,7 +1,5 @@
 package com.nevile.rts.hibernate.maping.many2many;
 
-import java.util.Date;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.hibernate.Session;

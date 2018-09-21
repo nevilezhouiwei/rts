@@ -9,8 +9,6 @@
 package com.nevile.rts.hibernate.maping.manyone.pojo;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * ClassName: Event
